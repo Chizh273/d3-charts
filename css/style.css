@@ -1,0 +1,50 @@
+h1 {
+  text-align: center;
+  font-family: 'Sedgwick Ave', 'Arial', cursive; }
+
+.container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%; }
+
+@media (min-width: 320px) {
+  .svg-wrapper {
+    width: 250px; } }
+
+@media (min-width: 768px) {
+  .svg-wrapper {
+    width: 510px; } }
+
+@media (min-width: 1024px) {
+  .svg-wrapper {
+    width: 800px; } }
+
+svg {
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+  border: 1px solid #ddd; }
+  svg circle {
+    stroke: #ccc;
+    stroke-width: 3px;
+    fill-opacity: 0; }
+  svg line {
+    stroke-width: 1px;
+    stroke: #ccc; }
+  svg polygon {
+    fill-opacity: 0.6;
+    fill: #a00;
+    stroke: #700;
+    stroke-width: 4px;
+    stroke-opacity: 0.8; }
+
+/*# sourceMappingURL=style.css.map*/
