@@ -1,0 +1,1 @@
+setTimeout(() => alert(`It's work!`), 500)
