@@ -1,10 +1,13 @@
+import {select} from 'd3-selection';
+import {range} from 'd3-array';
+
 const DEG_180 = 180;
 const DEG_360 = 360;
 const PI_HALF = Math.PI / 2;
 const RADIAN_IN_ONE_DEG = Math.PI / DEG_180;
 
-export function createChart(d3, rootElSelector, points) {
-  const root = d3.select(rootElSelector);
+export function createChart(rootElSelector, points) {
+  const root = select(rootElSelector);
 
   const svgSize = {
     width: parseInt(root.style('width'), 10),
@@ -15,7 +18,7 @@ export function createChart(d3, rootElSelector, points) {
     x: svgSize.width / 2,
     y: svgSize.height / 2,
   };
-  const circleRange = d3.range(1, radius, radius / 5);
+  const circleRange = range(1, radius, radius / 5);
   const circlePoints = getPolygonPoints(5, Math.max(...circleRange), center);
   const underlay = createEl(root, 'g', 'underlay');
   const arcsG = createEl(underlay, 'g', 'arcs');

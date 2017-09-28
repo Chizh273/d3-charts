@@ -10,12 +10,17 @@ const extractSass = new ExtractTextPlugin({
 
 const PORT = 3000;
 
+function nullFilter(array) {
+  return array.filter(item => item);
+}
+
 module.exports = {
   entry: {
-    main: [
-      `webpack-dev-server/client?http://localhost:${PORT}/`,
+    main: nullFilter([
+      process.env.NODE_ENV !== 'production' ?
+          `webpack-dev-server/client?http://localhost:${PORT}/` : null,
       path.join(__dirname, 'src/js/index.js')
-    ],
+    ]),
     style: path.join(__dirname, 'src/scss/index.scss')
   },
   output: {
@@ -24,15 +29,17 @@ module.exports = {
     chunkFilename: 'js/[name].chunk.js',
     sourceMapFilename: '[file].map'
   },
-  plugins: [
+  plugins: nullFilter([
     new WebpackNotifierPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.join(__dirname, './src/index.html')
     }),
-    new webpack.HotModuleReplacementPlugin({ multistep: true }),
+    process.env.NODE_ENV !== 'production' ?
+        new webpack.HotModuleReplacementPlugin({multistep: true}) :
+        false,
     extractSass
-  ],
+  ]),
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     watchContentBase: true,
@@ -46,7 +53,7 @@ module.exports = {
       ignored: /node_modules/
     }
   },
-  devtool: 'source-map',
+  devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : 'nosources-source-map',
   resolve: {
     extensions: ['.js'],
   },
@@ -58,12 +65,12 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
-              options: { sourceMap: true }
+              options: { sourceMap: process.env.NODE_ENV !== 'production' }
             },
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: true,
+                sourceMap: process.env.NODE_ENV !== 'production',
                 plugins: (loader) => [
                   require('autoprefixer')(['last 10 version', 'ie >= 10', 'Firefox 15']),
                 ]
@@ -71,7 +78,7 @@ module.exports = {
             },
             {
               loader: 'sass-loader',
-              options: { sourceMap: true }
+              options: { sourceMap: process.env.NODE_ENV !== 'production' }
             }
           ],
           // use style-loader in development
