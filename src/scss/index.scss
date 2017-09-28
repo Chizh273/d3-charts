@@ -1,3 +1,55 @@
+@import '~breakpoint-sass';
+
 h1 {
-	text-align: center;
+  text-align: center;
+  font-family: 'Sedgwick Ave', 'Arial', cursive;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.svg-wrapper {
+
+  @include breakpoint('320px') {
+    width: 250px;
+  }
+
+  @include breakpoint('768px') {
+    width: 510px;
+  }
+
+  @include breakpoint('1024px') {
+    width: 800px;
+  }
+}
+
+svg {
+  display: inline-block;
+  width: 250px;
+  height: 250px;
+  border: 1px solid #ddd;
+
+  circle {
+    stroke: #ccc;
+    stroke-width: 3px;
+    fill-opacity: 0;
+  }
+
+  line {
+    stroke-width: 1px;
+    stroke: #ccc;
+  }
+
+  polygon {
+    fill-opacity: 0.6;
+    fill: #a00;
+    stroke: #700;
+    stroke-width: 4px;
+    stroke-opacity: 0.8;
+  }
+
 }
